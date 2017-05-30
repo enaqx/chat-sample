@@ -1,0 +1,13 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "mocha": true
+  },
+  "rules": {
+    "array-bracket-spacing": "off",
+    "func-names": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "space-before-function-paren": "off"
+  }
+}
