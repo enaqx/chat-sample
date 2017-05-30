@@ -25,3 +25,5 @@ You can seamlessly use same functionality through mobile app for iOS and Android
   * Start iOS app: `$ yarn ios`
   * You can also start Android app: `$ yarn android` (you need open emulator for this)
   * Use existing user to Log In or create new one for app.
+
+![Screenshot](https://api.monosnap.com/rpc/file/download?id=dKt0Ti8xCedpiD3ptyTvhela7aVMI6)
