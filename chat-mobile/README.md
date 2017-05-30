@@ -6,9 +6,9 @@
   * Install dependencies: `$ yarn`
   * Start chat server
 
-# Start app for iOS
+##### Start app for iOS
   * `$ yarn ios`
 
-# Start app for Android
+##### Start app for Android
   * Start Android emulator or connect Android device
   * `$ yarn android`
