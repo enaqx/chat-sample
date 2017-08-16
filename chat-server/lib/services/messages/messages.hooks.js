@@ -5,18 +5,19 @@
 import auth from 'feathers-authentication';
 import common from 'feathers-hooks-common';
 import processMessage from '../../hooks/process-message';
+import seenMessage from '../../hooks/seen-message';
 
 const authenticate = auth.hooks.authenticate;
 const { populate } = common;
 
 export default {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [ processMessage() ],
-    update: [ processMessage() ],
-    patch: [ processMessage() ],
+    create: [processMessage()],
+    update: [processMessage()],
+    patch: [seenMessage()],
     remove: [],
   },
 
@@ -24,12 +25,14 @@ export default {
     all: [
       populate({
         schema: {
-          include: [{
-            service: 'users',
-            nameAs: 'user',
-            parentField: 'userId',
-            childField: '_id',
-          }],
+          include: [
+            {
+              service: 'users',
+              nameAs: 'user',
+              parentField: 'userId',
+              childField: '_id',
+            },
+          ],
         },
       }),
     ],

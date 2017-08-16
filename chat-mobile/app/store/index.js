@@ -128,7 +128,7 @@ export default class Store {
     let $skip = this.skip;
 
     const query = {query: {$sort: {createdAt: -1}, $skip}};
-    
+
     return this.app.service('messages').find(query).then(response => {
       const messages = [];
       const skip = response.skip + response.limit;
@@ -136,6 +136,10 @@ export default class Store {
       for (let message of response.data) {
         messages.push(this.formatMessage(message));
       }
+
+      this.app.service('messages').patch(messages[0]._id, {seen: true}).then(result => {
+        console.log('message seen!');
+      }).catch((error) => console.log(error));
 
       console.log('loaded messages from server', JSON.stringify(messages, null, 2));
       if (!loadNextPage) {
@@ -154,9 +158,10 @@ export default class Store {
   formatMessage(message) {
     return {
       _id: message._id,
-      text: message.text,
+      text: `${message.text} (${message.seen ? 'seen': 'sent'})`,
       position: message.user._id.toString() === this.user._id.toString() ? 'left' : 'right',
       createdAt: new Date(message.createdAt),
+      seen: message.seen,
       user: {
         _id: message.user._id ? message.user._id : '',
         name: message.user.email ? message.user.email : message.name,
